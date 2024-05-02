@@ -4,6 +4,7 @@ pipeline {
     stage ('test') {
       steps{
         sh 'echo "test okkkkkkkkk"'
+        sh 'apt install docker' 
         sh 'docker ps -a'
       }
     }
