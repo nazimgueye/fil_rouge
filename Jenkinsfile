@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage ('test') {
             steps {
-                powershell 'docker ps -a'
+                bat 'docker ps -a'
             }
         }
         stage ('Run Docker Compose') {
             steps {
-                powershell 'docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
     }
