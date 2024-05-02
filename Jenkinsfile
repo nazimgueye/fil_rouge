@@ -8,10 +8,10 @@ pipeline {
         }
         stage ('Run Docker Compose') {
             steps {
-                bat 'docker-compose up -d'
+                bat 'dockercompose up -d'
             }
         }
-    
+    }
     post {
         success {
             slackSend channel: '#projetdevops', message: 'code reussi'
