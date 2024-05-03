@@ -1,22 +1,9 @@
 pipeline {
     agent any
-    triggers {
-        githubPush()
-    }
     stages {
-        stage('Checkout') {
+        stage ('test') {
             steps {
-                git 'https://github.com/nazimgueye/fil_rouge.git'
-            }
-        }
-        stage ('Build Docker Images') {
-            steps {
-                bat 'docker-compose build'
-            }
-        }
-        stage ('Run Tests') {
-            steps {
-                bat 'docker ps -a' // Remplacez ceci par vos tests réels si nécessaire
+                bat 'docker ps -a'
             }
         }
         stage ('Run Docker Compose') {
@@ -27,10 +14,10 @@ pipeline {
     }
     post {
         success {
-            slackSend channel: '#projetdevops', message: 'Build réussi'
+            slackSend channel: '#projetdevops', message: 'code reussi'
         }
         failure {
-            slackSend channel: '#projetdevops', message: 'Build echoue'
+            slackSend channel: '#projetdevops', message: 'code error'
         }
     }
 }
