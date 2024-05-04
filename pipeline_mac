@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage ('test') {
       steps{
-        sh 'echo "test okkkkkkkkk"'
-        sh 'apt install docker' 
-        sh 'docker ps -a'
+       // sh 'docker ps -a'
       }
     }
     stage ('Run Docker Compose') {
