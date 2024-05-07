@@ -11,6 +11,11 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
+                stage('Send Mail') {
+            steps {
+                mail bcc: '', body: 'Test envoi mail', subject: 'Test', to: 'nazimgueye17@gmail.com'
+            }
+        }
     }
     post {
         success {
