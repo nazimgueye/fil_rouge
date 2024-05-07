@@ -1,34 +1,15 @@
 pipeline {
     agent any
-    
     stages {
-        // stage('Build Docker Images') {
-        //     steps {
-        //         script {
-        //             // Construire les images Docker avec docker-compose build
-        //             bat 'docker-compose build'
-        //         }
-        //     }
-        // }
-        stage('Start Containers') {
+        stage('test') {
             steps {
-                script {
-                    // Démarrer les conteneurs avec docker-compose up
-                    bat 'docker-compose up -d --build' // L'option -d est utilisée pour exécuter en arrière-plan
-                }
+                bat 'docker ps -a'
             }
         }
-    }
-    post {
-        always {
-            // Arrêter les conteneurs avec docker-compose down
-           // bat 'docker-compose down'
-            // Envoyer une notification a
-            slackSend channel: 'devops', color: 'good', message: "Build and deployment completed successfully!"
-        }
-        failure {
-            // Envoyer une notification Slack en cas d'échec
-            slackSend channel: 'devops', color: 'danger', message: "Build or deployment failed!"
+        stage('Run Docker Compose') {
+            steps {
+                bat 'docker-compose up -d'
+            }
         }
     }
 }
