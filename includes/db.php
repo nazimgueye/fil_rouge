@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 //création de la base
 $sql_creation_base =" CREATE DATABASE IF NOT EXISTS fil_rouge; ";
 if ($conn->query($sql_creation_base) === TRUE) {
-    echo "Table créée avec succès";
+   // echo "Table créée avec succès";
 }
 
 
