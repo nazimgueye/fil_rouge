@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Tag images') {
             steps {
-                docker build -t test1-db:1.0 Db.Dockerfile
+                docker build -t test1-db:1.0 -f Db.Dockerfile .
             }
         }
     }
