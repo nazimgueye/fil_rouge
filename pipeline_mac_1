@@ -6,5 +6,10 @@ pipeline {
                 sh 'docker version'
             }
         }
+        stage('Tag images') {
+            steps {
+                docker build -t test1-db:1.0 Db.Dockerfile
+            }
+        }
     }
 }
