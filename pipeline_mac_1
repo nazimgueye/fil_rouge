@@ -6,17 +6,5 @@ pipeline {
                 sh 'docker version'
             }
         }
-        stage('Tag images') {
-            steps {
-                //sh 'docker-compose up -d --build'
-            }
-        }
-    }
-    post {
-        success {
-            script {
-                mail bcc: '', body: 'Test envoi mail', subject: 'Test', to: 'nazimgueye17@gmail.com'
-            }
-        }
     }
 }
