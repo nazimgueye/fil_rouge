@@ -11,26 +11,52 @@ pipeline {
         }
         stage ('Build Docker Images') {
             steps {
-                bat 'docker-compose build'
+                script {
+                    // Build des images Docker
+                    sh 'docker-compose build'
+                }
             }
         }
-        stage ('Run Tests') {
+        stage ('Deploy to Kubernetes') {
             steps {
-                bat 'docker ps -a' // Remplacez ceci par vos tests réels si nécessaire
+                script {
+                    // Récupérer le fichier kubeconfig depuis les credentials de Jenkins
+                    def kubeconfig = credentials(kube_config)
+
+                    // Assurez-vous que le fichier kubeconfig existe
+                    if (!fileExists(kubeconfig)) {
+                        error "Le fichier kubeconfig n'existe pas à l'emplacement spécifié."
+                    }
+
+                    // Appliquer les ressources Kubernetes depuis le dossier 'kubernetes' en utilisant le fichier kubeconfig
+                    dir('kubernetes') {
+                        // Utilisez la commande kubectl apply avec l'option --kubeconfig pour spécifier le fichier kubeconfig
+                        sh "kubectl apply -f . --kubeconfig=$kubeconfig"
+                    }
+                }
             }
         }
         stage ('Run Docker Compose') {
             steps {
-                bat 'docker-compose up -d'
+                script {
+                    // Lancement des conteneurs Docker avec Docker Compose
+                    sh 'docker-compose up -d --build'
+                }
             }
         }
     }
     post {
         success {
+            // Arrêter les conteneurs Docker en cas de succès
+            script {
+                // bat 'docker-compose down -v'
+            }
+            // Envoyer un message de réussite à Slack
             slackSend channel: '#projetdevops', message: 'Build réussi'
         }
         failure {
-            slackSend channel: '#projetdevops', message: 'Build echoue'
+            // Envoyer un message d'échec à Slack
+            slackSend channel: '#projetdevops', message: 'Build échoué'
         }
     }
 }
