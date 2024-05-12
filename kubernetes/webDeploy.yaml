@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: web
-          image: cheikht/gr3_pipeline-web:latest
+          image: cheikht/gr3_pipeline-php
           ports:
             - containerPort: 80

@@ -16,6 +16,9 @@ spec:
     spec:
       containers:
         - name: db
-          image: cheikht/gr3_pipeline-db:latest
+          image: cheikht/gr3_pipeline-db
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
           ports:
             - containerPort: 3306
