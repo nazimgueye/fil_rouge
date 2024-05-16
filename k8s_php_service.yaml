@@ -3,12 +3,13 @@ kind: Service
 metadata:
   name: php-service
 spec:
-  type: LoadBalancer
-#  externalIPs:
-#    - 127.0.0.1
   selector:
     app: php-app
   ports:
     - protocol: TCP
       port: 8585
       targetPort: 80
+  type: LoadBalancer
+  #  externalIPs:
+  #    - 127.0.0.1
+
