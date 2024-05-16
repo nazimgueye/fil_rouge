@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: php-app
-          image:  cloudsurfersn/fil_rouge-php:latest
+          image:  cloudsurfersn/fil-rouge-php:latest
           ports:
             - containerPort: 80
 #          volumeMounts:

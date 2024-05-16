@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: db
-          image: cloudsurfersn/fil_rouge-db:latest #mysql:5.7  #test1-db
+          image: cloudsurfersn/fil-rouge-db:latest #mysql:5.7  #test1-db
           ports:
             - containerPort: 3306
           env:
