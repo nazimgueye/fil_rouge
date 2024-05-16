@@ -31,7 +31,7 @@ pipeline {
                     sh 'kubectl  apply -f k8s_mysql_deploiement.yaml'
                     sh 'kubectl  apply -f k8s_php_deploiement.yaml'
 
-                    sh 'minikube start'
+                    sh 'minikube start --driver=docker'
 
                     sh 'kubectl  apply -f k8s_mysql_service.yaml'
                     sh 'kubectl  apply -f k8s_php_service.yaml'
