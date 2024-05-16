@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build images') {
+            steps {
+                sh 'docker build -t test1-db:1.0 -f Db.Dockerfile .'
+                sh 'docker build -t test1-php:1.0 -f Web.Dockerfile .'
+            }
+        }
+        stage('Tag images') {
+            steps {
+                echo 'TERMINÉ'
+            
+        }
+        }
+
+    }
+}
