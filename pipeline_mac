@@ -2,7 +2,7 @@ pipeline {
     agent any
        environment {
             login = 'cloudsurfersn'
-            password = 'dckr_pat_6UEeS-amF2QADU-aOAOoGWLYwok'
+            pass = 'dckr_pat_6UEeS-amF2QADU-aOAOoGWLYwok'
         }
     stages {
         stage('Build images') {
@@ -20,7 +20,7 @@ pipeline {
                             docker.withRegistry('https://hub.docker.com', 'login_docker_hub') {
                                 docker.image("cloudsurfersn/fil-rouge-db:3.0").push()
                             }*/
-                            sh 'docker login -u $login -p $password'
+                            sh 'docker login -u $login -p $pass'
                             sh 'docker push cloudsurfersn/fil-rouge-db:3.0'
                             sh 'docker push cloudsurfersn/fil-rouge-php:3.0'
                             //sh 'docker logout'
