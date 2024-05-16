@@ -1,10 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build images') {
             steps {
-                sh 'docker version'
-                sh 'echo ${test_var}ici'
+                sh 'docker-compose --build'
             }
         }
         /*stage('Run Docker Compose') {
