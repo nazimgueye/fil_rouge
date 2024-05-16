@@ -1,12 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('test') {
+        stage('Build') {
             steps {
                 sh 'docker version'
+                sh 'echo ${test_var}'
             }
         }
-        stage('Run Docker Compose') {
+        /*stage('Run Docker Compose') {
             steps {
                 sh 'docker-compose up -d --build'
             }
@@ -15,13 +16,13 @@ pipeline {
             steps {
                 mail bcc: '', body: 'Test envoi mail', subject: 'Test', to: 'nazimgueye17@gmail.com'
             }
-        }
+        }*/
     }
-    post {
+   /* post {
         success {
             script {
                 slackSend(channel: "dev-et-devops", message: "my-first-pipeline-slack passed successfully")
             }
         }
-    }
+    }*/
 }
