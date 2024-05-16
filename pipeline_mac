@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'docker version'
-                sh 'echo ${test_var}'
+                sh 'echo ${test_var}ici'
             }
         }
         /*stage('Run Docker Compose') {
