@@ -27,6 +27,20 @@ pipeline {
                         //sh 'docker logout'
                     }
                 }
+                stage('Kubernetes') {
+                    steps {
+                    sh 'kubectl  apply -f k8s_mysql_deploiement.yaml'
+                    sh 'kubectl  apply -f k8s_php_deploiement.yaml'
+
+                    sh 'minikube start'
+
+                    sh 'kubectl  apply -f k8s_mysql_service.yaml'
+                    sh 'kubectl  apply -f k8s_php_service.yaml'
+
+                    sh 'minikube tunnel'
+
+                    }
+                }
         /*stage('Run Docker Compose') {
             steps {
                 sh 'docker-compose up -d --build'
