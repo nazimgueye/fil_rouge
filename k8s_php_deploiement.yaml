@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-app
+  template:
+    metadata:
+      labels:
+        app: php-app
+    spec:
+      containers:
+        - name: php-app
+          image:  cloudsurfersn/1-php:1.0
+          ports:
+            - containerPort: 80
+#          volumeMounts:
+#            - name: php-html-volume
+#              mountPath: /var/www/html/
+#      volumes:
+#        - name: php-html-volume
+#          emptyDir: { }
+          env:
+            - name: db
+              value: mysql-service
+#            - name: MYSQL_USER
+#              value: root
+#            - name: MYSQL_PASSWORD
+#              value: yourpassword
