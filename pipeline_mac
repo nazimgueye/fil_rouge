@@ -4,8 +4,22 @@ pipeline {
         stage('Build images') {
             steps {
                 sh 'docker-compose build'
+                sh 'docker tag fil-rouge-db cloudsurfer/fil-rouge-db:3.0'
+                sh 'docker tag fil-rouge-php cloudsurfer/fil-rouge-php:3.0'
+
             }
         }
+              stage('Push Docker Image') {
+                    steps {
+                        // Push Docker image to registry
+                        script {
+                            docker.withRegistry('https://hub.docker.com', 'login_docker_hub') {
+                                //docker.image("cloudsurfer/nom-image:${env.BUILD_NUMBER}").push()
+                                docker.image("cloudsurfersn/fil-rouge-db:3.0").push()
+                            }
+                        }
+                    }
+                }
         /*stage('Run Docker Compose') {
             steps {
                 sh 'docker-compose up -d --build'
