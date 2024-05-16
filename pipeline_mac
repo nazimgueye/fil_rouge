@@ -4,8 +4,8 @@ pipeline {
         stage('Build images') {
             steps {
                 sh 'docker-compose build'
-                sh 'docker tag fil-rouge-db cloudsurfer/fil-rouge-db:3.0'
-                sh 'docker tag fil-rouge-php cloudsurfer/fil-rouge-php:3.0'
+                sh 'docker tag fil_rouge-db cloudsurfersn/fil-rouge-db:3.0'
+                sh 'docker tag fil_rouge-php cloudsurfersn/fil-rouge-php:3.0'
 
             }
         }
