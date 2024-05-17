@@ -36,7 +36,7 @@ pipeline {
                     sh 'kubectl  apply -f k8s_mysql_service.yaml'
                     sh 'kubectl  apply -f k8s_php_service.yaml'
 
-                    sh 'minikube tunnel'
+//                    sh 'minikube tunnel'
 
                     }
                 }
