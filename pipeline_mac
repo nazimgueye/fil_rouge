@@ -7,11 +7,8 @@ pipeline {
                 stage('Minikube') {
                     steps {
                     sh 'minikube start --driver=docker'
-                    sh 'cd ./terraform'
-                    sh 'pwd'
-                    sh 'terraform init'
-                    sh 'terraform apply --auto-approve'
-
+                    sh 'terraform -chdir=terraform init'
+                    sh 'terraform -chdir=terraform apply --auto-approve'
                 }
 
         /* stage('Send Mail') {
