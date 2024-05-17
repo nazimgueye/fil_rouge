@@ -4,48 +4,21 @@ pipeline {
             login = 'cloudsurfersn'
         }
     stages {
-        stage('Build images') {
-            steps {
-                sh 'docker-compose build'
-                sh 'docker tag fil_rouge-db cloudsurfersn/fil-rouge-db:3.0'
-                sh 'docker tag fil_rouge-php cloudsurfersn/fil-rouge-php:3.0'
-
-            }
-        }
-       /*       stage('Push Docker Image') {
-                    steps {
-                        // Push Docker image to registry
-                      /*  script {
-                            docker.withRegistry('https://hub.docker.com', 'login_docker_hub') {
-                                docker.image("cloudsurfersn/fil-rouge-db:3.0").push()
-                            }
-                        }*/
-                        sh 'docker login -u $login -p $token_docker_hub'
-                        sh 'docker push cloudsurfersn/fil-rouge-db:3.0'
-                        sh 'docker push cloudsurfersn/fil-rouge-php:3.0'
-                        //sh 'docker logout'
-                    }
-                }*/
                 stage('Minikube') {
                     steps {
                     sh 'minikube start --driver=docker'
 
-                    }
-                    steps {
-                    sh 'terraform init'
-                    sh 'terraform apply --auto-approve'
-                    }
+                         sh 'terraform init'
+                         sh 'terraform apply --auto-approve'
+
                 }
-        /*stage('Run Docker Compose') {
-            steps {
-                sh 'docker-compose up -d --build'
-            }
-        }
-                stage('Send Mail') {
+
+        /* stage('Send Mail') {
             steps {
                 mail bcc: '', body: 'Test envoi mail', subject: 'Test', to: 'nazimgueye17@gmail.com'
             }
         }*/
+    }
     }
    /* post {
         success {
