@@ -12,7 +12,7 @@ pipeline {
 
             }
         }
-              stage('Push Docker Image') {
+       /*       stage('Push Docker Image') {
                     steps {
                         // Push Docker image to registry
                       /*  script {
@@ -25,20 +25,15 @@ pipeline {
                         sh 'docker push cloudsurfersn/fil-rouge-php:3.0'
                         //sh 'docker logout'
                     }
-                }
-                stage('Kubernetes') {
+                }*/
+                stage('Minikube') {
                     steps {
-                    sh 'kubectl  apply -f k8s_mysql_deploiement.yaml'
-                    sh 'kubectl  apply -f k8s_php_deploiement.yaml'
-
                     sh 'minikube start --driver=docker'
 
-                    sh 'kubectl  apply -f k8s_mysql_service.yaml'
-                    sh 'kubectl  apply -f k8s_php_service.yaml'
-
-//                    sh 'minikube tunnel'
-//                    sh 'minikube service php-service'
-
+                    }
+                    steps {
+                    sh 'terraform init'
+                    sh 'terraform apply --auto-approve'
                     }
                 }
         /*stage('Run Docker Compose') {
