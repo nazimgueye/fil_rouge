@@ -1,0 +1,5 @@
+Pour utiliser le programme, il faut :
+- minikube start
+    - terraform init
+    - terraform apply --auto-approve
+- minikube tunnel
