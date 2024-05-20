@@ -1,0 +1,12 @@
+---
+- hosts: dockerhost
+#  become: true
+  tasks:
+    - name: Connexion au conteneur ubuntu1
+      command: docker exec ubuntu1 /bin/bash -c 'touch testttttt && exit'
+
+      register: docker_ps_output
+
+    - name: Afficher la sortie de 'docker ps'
+      debug:
+       var: docker_ps_output.stdout
