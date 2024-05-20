@@ -1,5 +1,1 @@
-Pour utiliser le programme, il faut :
-- minikube start
-    - terraform init
-    - terraform apply --auto-approve
-- minikube tunnel
+- exporter les identifiants aws ( AWS_ACCESS_KEY_ID et AWS_SECRET_ACCESS_KEY )
