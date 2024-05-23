@@ -2,15 +2,9 @@ pipeline {
     agent any
     stages {
 
-      stage('Demarrer minikube') {
-         steps {
-             sh 'minikube start --driver=docker'
-               }
-        }
-
         stage('Exécution Ansible') {
             steps {
-                sh 'ansible-playbook ansible/playbook_1.yml'
+                sh 'ansible-playbook ansible/playbook_2.yml'
             }
         }
 
