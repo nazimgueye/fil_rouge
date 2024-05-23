@@ -11,15 +11,15 @@
 
     - name:  Démarrer minikube
       shell: minikube start
-      register: minikube-sortie
+#      register: minikube-sortie
 
     - name: Création de l'infrastructure
       terraform:
          project_path: ../terraform
          force_init: yes
 
-    - name: sortie
-      debug: msg="{{ hello.stdout }}"
+#    - name: sortie
+#      debug: msg="{{ minikube-sortie.stdout }}"
 
 
 
@@ -28,3 +28,5 @@
 #      shell: terraform -chdir=../terraform init
 #    - name: Run terraform file
 #      shell: terraform -chdir=../terraform apply -auto-approve
+
+#  sudo chown -R $USER $HOME/.minikube; chmod -R u+wrx $HOME/.minikube
