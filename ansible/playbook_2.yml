@@ -18,15 +18,3 @@
          project_path: ../terraform
          force_init: yes
 
-#    - name: sortie
-#      debug: msg="{{ minikube-sortie.stdout }}"
-
-
-
-#         command: terraform apply -auto-approve
-#    - name: Initialisation de terraform
-#      shell: terraform -chdir=../terraform init
-#    - name: Run terraform file
-#      shell: terraform -chdir=../terraform apply -auto-approve
-
-#  sudo chown -R $USER $HOME/.minikube; chmod -R u+wrx $HOME/.minikube
