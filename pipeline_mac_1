@@ -1,17 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Build images') {
+        stage('Exécution Ansible') {
             steps {
-                sh 'docker build -t test1-db:1.0 -f Db.Dockerfile .'
-                sh 'docker build -t test1-php:1.0 -f Web.Dockerfile .'
+                sh 'ansible-playbook ansible/playbook_1.yml'
             }
-        }
-        stage('Tag images') {
-            steps {
-                echo 'TERMINÉ'
-            
-        }
         }
 
     }
