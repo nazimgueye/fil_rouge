@@ -1,6 +1,6 @@
 ---
 - name: Installer Docker
-#  hosts: all
+  hosts: localhost
   become: yes
   tasks:
     - name: Mettre à jour la liste des paquets

@@ -1,6 +1,6 @@
 ---
 - name: Playbook Minikube - Installer Minikube
-#  hosts: localhost
+  hosts: localhost
   become: yes
   tasks:
     - name: Télécharger Minikube

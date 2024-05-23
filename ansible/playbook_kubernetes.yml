@@ -1,6 +1,6 @@
 ---
 - name: Installer kubectl
-#  hosts: all
+  hosts: localhost
   become: yes
   tasks:
     - name: Mettre à jour les paquets et installer apt-transport-https
