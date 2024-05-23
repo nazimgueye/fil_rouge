@@ -1,20 +1,17 @@
-terraform {
-  required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.0"
-    }
-  }
-}
-
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+  config_path = "~/.kube/config" //"~/.kube/config"
+}
+resource "kubernetes_manifest" "deployment_web" {
+  manifest = yamldecode(file("../k8s_mysql_deploiement.yaml"))
 }
 
-# Terraform provisionne uniquement le cluster Kubernetes ici
-# Les déploiements et services Kubernetes seront gérés par Ansible
+resource "kubernetes_manifest" "deployment_db" {
+  manifest = yamldecode(file("../k8s_php_deploiement.yaml"))
+}
 
-output "kube_config" {
-  value = file("~/.kube/config")
-  sensitive = true
+resource "kubernetes_manifest" "db-service" {
+  manifest = yamldecode(file("../k8s_mysql_service.yaml"))
+}
+resource "kubernetes_manifest" "web-service" {
+  manifest = yamldecode(file("../k8s_php_service.yaml"))
 }

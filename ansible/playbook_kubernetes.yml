@@ -1,0 +1,29 @@
+---
+- name: Installer kubectl
+#  hosts: all
+  become: yes
+  tasks:
+    - name: Mettre à jour les paquets et installer apt-transport-https
+      apt:
+        update_cache: yes
+        name: apt-transport-https
+        state: present
+
+    - name: Ajouter la clé GPG pour le dépôt Kubernetes
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: Ajouter le dépôt Kubernetes à sources.list.d
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+
+    - name: Mettre à jour les paquets après ajout du dépôt Kubernetes
+      apt:
+        update_cache: yes
+
+    - name: Installer kubectl
+      apt:
+        name: kubectl
+        state: present

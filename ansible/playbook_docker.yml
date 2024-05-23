@@ -1,0 +1,42 @@
+---
+- name: Installer Docker
+#  hosts: all
+  become: yes
+  tasks:
+    - name: Mettre à jour la liste des paquets
+      apt:
+        update_cache: yes
+
+    - name: Installer les paquets nécessaires
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Ajouter la clé GPG pour le dépôt Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Ajouter le dépôt Docker à sources.list.d
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        state: present
+
+    - name: Mettre à jour la liste des paquets après ajout du dépôt Docker
+      apt:
+        update_cache: yes
+
+    - name: Installer Docker CE
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Ajouter l'utilisateur actuel au groupe docker
+      user:
+        name: "{{ ansible_user_id }}"
+        groups: docker
+        append: yes

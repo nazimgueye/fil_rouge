@@ -1,0 +1,22 @@
+---
+- name: Playbook Minikube - Installer Minikube
+#  hosts: localhost
+  become: yes
+  tasks:
+    - name: Télécharger Minikube
+      ansible.builtin.get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /tmp/minikube
+        mode: '0755'
+
+    - name: Créer le répertoire /usr/local/bin/ s'il n'existe pas
+      ansible.builtin.file:
+        path: /usr/local/bin/
+        state: directory
+        mode: '0755'
+
+    - name: Installer Minikube
+      ansible.builtin.copy:
+        src: /tmp/minikube
+        dest: /usr/local/bin/minikube
+        mode: '0755'
